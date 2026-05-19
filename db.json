@@ -1,0 +1,28 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "title": "Wireless Headphones",
+      "price": 79.99,
+      "description": "High-quality wireless headphones with noise cancellation.",
+      "category": "Electronics",
+      "imageUrl": ""
+    },
+    {
+      "id": 2,
+      "title": "Leather Backpack",
+      "price": 89.99,
+      "description": "Handcrafted genuine leather backpack.",
+      "category": "Accessories",
+      "imageUrl": ""
+    },
+    {
+      "id": 3,
+      "title": "Smart Watch",
+      "price": 199.99,
+      "description": "Track your fitness and stay connected.",
+      "category": "Electronics",
+      "imageUrl": ""
+    }
+  ]
+}
