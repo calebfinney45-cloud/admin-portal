@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "server": "json-server db.json --port 5000"
   },
   "dependencies": {
     "@calcom/cal-sans-ui": "^1.3.0",
@@ -19,8 +20,10 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^1.16.0",
+    "prop-types": "^15.8.1",
     "radix-ui": "^1.4.3",
     "react": "^19.2.6",
+    "@radix-ui/react-slot": "^1.1.0",
     "react-dom": "^19.2.6",
     "react-router-dom": "^7.15.1",
     "shadcn": "^4.7.0",
@@ -34,6 +37,7 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
+    "json-server": "^1.0.0-beta.1",
     "eslint": "^10.3.0",
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
