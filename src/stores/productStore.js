@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-const API_URL = 'http://localhost:5000/products'
+const API_URL = '/api/products'
 
 const useProductStore = create((set, get) => ({
   //State  
