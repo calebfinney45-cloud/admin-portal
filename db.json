@@ -24,6 +24,5 @@
       "category": "Electronics",
       "imageUrl": "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&w=800&q=80"
     }
-  ],
-  "$schema": "./node_modules/json-server/schema.json"
+  ]
 }
