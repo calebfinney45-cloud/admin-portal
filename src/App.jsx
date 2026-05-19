@@ -1,5 +1,5 @@
 // src/App.jsx
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import LandingPage from './pages/LandingPage'
 import ProductListPage from './pages/ProductListPage'
@@ -8,7 +8,6 @@ import EditProductPage from './pages/EditProductPage'
 
 export default function App() {
   return (
-    <BrowserRouter>
       <div className='bg-gray-50 min-h-screen'>
         <Navbar />
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -20,6 +19,5 @@ export default function App() {
           </Routes>
         </main>
       </div>
-    </BrowserRouter>
   )
 }
