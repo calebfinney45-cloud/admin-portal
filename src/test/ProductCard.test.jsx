@@ -1,5 +1,5 @@
-import { render, screen, fireEvent } from '@testing-library/react'
-import { BrowserRouter } from 'react-router-dom'   // <-- add this
+import { render, screen, fireEvent, within } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
 import { describe, it, expect, vi } from 'vitest'
 import ProductCard from '../components/ProductCard'
 import useProductStore from '../stores/productStore'
@@ -17,39 +17,52 @@ const mockProduct = {
 
 // Helper to render with router
 const renderWithRouter = (ui) => {
-  return render(<BrowserRouter>{ui}</BrowserRouter>)
+  return render(<MemoryRouter>{ui}</MemoryRouter>)
 }
 
 describe('ProductCard', () => {
-  it('renders product title and price', () => {
-    useProductStore.mockReturnValue({ deleteProduct: vi.fn() })
+  it('renders product title', () => {
+    useProductStore.mockImplementation((selector) => selector({ deleteProduct: vi.fn() }))
     renderWithRouter(<ProductCard product={mockProduct} />)
     expect(screen.getByText('Test Headphones')).toBeInTheDocument()
+  })
+
+  it('renders product price', () => {
+    useProductStore.mockImplementation((selector) => selector({ deleteProduct: vi.fn() }))
+    renderWithRouter(<ProductCard product={mockProduct} />)
     expect(screen.getByText('$99.99')).toBeInTheDocument()
   })
 
-  it('shows delete confirmation dialog when clicking delete button', () => {
+  it('renders product description', () => {
+    useProductStore.mockImplementation((selector) => selector({ deleteProduct: vi.fn() }))
+    renderWithRouter(<ProductCard product={mockProduct} />)
+    expect(screen.getByText('Great sound')).toBeInTheDocument()
+  })
+
+  it('shows delete confirmation dialog when clicking delete button', async () => {
     const mockDelete = vi.fn()
-    useProductStore.mockReturnValue({ deleteProduct: mockDelete })
+    // Correctly mock Zustand selector to return the function, not the object
+    useProductStore.mockImplementation((selector) => selector({ deleteProduct: mockDelete }))
 
     renderWithRouter(<ProductCard product={mockProduct} />)
 
-    const deleteButton = screen.getByRole('button', { name: /delete/i })
+    // Open the dialog
+    const deleteButton = screen.getByRole('button', { name: /^delete$/i })
     fireEvent.click(deleteButton)
 
-    // Check dialog appears (using testid or text)
-    expect(screen.getByText(/are you sure/i)).toBeInTheDocument()
-    expect(screen.getByText(/Test Headphones/i)).toBeInTheDocument()
+    // Use findBy to wait for the Portal to render and get the dialog content
+    const dialog = await screen.findByRole('alertdialog')
+    expect(within(dialog).getByText(/are you sure/i)).toBeInTheDocument()
 
-    // Click the confirm button – note: AlertDialogAction text is "Delete"
-    const confirmButton = screen.getByRole('button', { name: /delete/i, hidden: true })
+    // Query inside the dialog to avoid finding the trigger button in the background
+    const confirmButton = within(dialog).getByRole('button', { name: /^delete$/i })
     fireEvent.click(confirmButton)
 
     expect(mockDelete).toHaveBeenCalledWith(1)
   })
 
   it('renders edit link with correct URL', () => {
-    useProductStore.mockReturnValue({ deleteProduct: vi.fn() })
+    useProductStore.mockImplementation((selector) => selector({ deleteProduct: vi.fn() }))
     renderWithRouter(<ProductCard product={mockProduct} />)
     const editLink = screen.getByRole('link', { name: /edit/i })
     expect(editLink).toHaveAttribute('href', '/products/1/edit')

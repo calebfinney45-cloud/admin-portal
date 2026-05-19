@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 
 ProductCard.propTypes = {
   product: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     description: PropTypes.string,
@@ -39,18 +39,27 @@ export default function ProductCard({ product }) {
         <h3 className="font-heading font-semibold text-lg text-gray-800 mb-1 truncate">
           {product.title}
         </h3>
+        {product.description && (
+          <p className="text-gray-600 text-sm mb-3 line-clamp-2 h-10">
+            {product.description}
+          </p>
+        )}
         <p className="text-2xl font-bold text-indigo-600 mb-4">
           ${product.price}
         </p>
         
         {/* Buttons */}
         <div className="flex gap-3">
-          <Link to={`/products/${product.id}/edit`} className="flex-1">
-            <Button variant="outline" className="w-full gap-2">
+          <Button
+            variant='outline'
+            className="flex-1 gap-2"
+            asChild
+          >
+            <Link to={`/products/${product.id}/edit`}>
               <Edit className="w-4 h-4" />
               Edit
-            </Button>
-          </Link>
+            </Link>
+          </Button>
           
           <AlertDialog>
             <AlertDialogTrigger asChild>

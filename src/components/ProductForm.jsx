@@ -35,7 +35,12 @@ function ProductForm({ initialData = {}, onSubmit, submitLabel = 'Save Product' 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await onSubmit(formData);
+    // Ensure price is sent as a number to match the database schema
+    const submissionData = {
+      ...formData,
+      price: formData.price === '' ? 0 : Number(formData.price)
+    };
+    await onSubmit(submissionData);
     navigate('/products');
   };
 

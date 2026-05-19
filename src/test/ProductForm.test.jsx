@@ -29,7 +29,7 @@ describe('ProductForm', () => {
 
     expect(mockSubmit).toHaveBeenCalledWith({
       title: 'New Gadget',
-      price: '49.99',
+      price: 49.99,
       description: 'Amazing new gadget',
       category: 'Gadgets',
       imageUrl: '',
