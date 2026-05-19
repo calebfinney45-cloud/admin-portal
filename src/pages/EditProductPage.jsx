@@ -19,8 +19,7 @@ function EditProductPage() {
       }
 
       // Try to find the product
-      const productId = Number.parseInt(id);
-      const found = products.find(p => p.id === productId);
+      const found = products.find(p => String(p.id) === String(id));
       
       if (found) {
         setProduct(found);
@@ -56,7 +55,7 @@ function EditProductPage() {
       <div className="bg-white rounded-xl border border-gray-200 p-6">
         <ProductForm 
           initialData={product} 
-          onSubmit={(data) => updateProduct(Number.parseInt(id), data)}
+          onSubmit={(data) => updateProduct(product.id, data)}
           submitLabel="Update Product"
         />
       </div>

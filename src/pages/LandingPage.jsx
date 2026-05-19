@@ -19,12 +19,12 @@ function LandingPage() {
           A simple, powerful admin portal to add, edit, and manage your product inventory.
           Built with modern React practices.
         </p>
-        <Link to="/products">
-          <Button size="lg" className="gap-2">
+        <Button size="lg" className="gap-2" asChild>
+          <Link to="/products">
             Get Started
             <TrendingUp className="w-4 h-4" />
-          </Button>
-        </Link>
+          </Link>
+        </Button>
       </div>
 
       {/* Features Section */}

@@ -2,7 +2,7 @@ import { create } from 'zustand'
 
 const API_URL = 'http://localhost:5000/products'
 
-const useProductStore = create((set) => ({
+const useProductStore = create((set, get) => ({
   //State  
   products: [],
   loading: false,
@@ -54,6 +54,7 @@ const useProductStore = create((set) => ({
 
   // DELETE: Remove from server and filter from local array
   deleteProduct: async (id) => {
+    console.log('deleting product with id:', id, typeof id)
     try {
       await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
       set((state) => ({
