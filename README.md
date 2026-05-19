@@ -56,6 +56,7 @@ Supports full CRUD operations, client‑side routing, a custom debounce hook, an
 ---
 
 ## Project Structure
+```text
 productflow/
 ├── src/
 │ ├── components/
@@ -87,6 +88,7 @@ productflow/
 ├── package.json
 ├── vitest.config.js
 └── README.md
+```
 
 ---
 
